@@ -7,13 +7,14 @@ use Monolog\Logger;
 /**
  * Class to perform all user related queries.
  *
- * @author Anik
+ * @author arnonm@gmail.com
  */
 class ValueService extends \JiraRestApi\JiraClient
 {
     private $uri = '/structure';
 
-    #POST $baseUrl/rest/structure/2.0/item/create
+    #POST $baseUrl/rest/structure/2.0/value
+    #https://wiki.almworks.com/display/structure/Value+Resource
 
     public function __construct(ConfigurationInterface $configuration = null, Logger $logger = null, $path = './')
     {
@@ -21,14 +22,9 @@ class ValueService extends \JiraRestApi\JiraClient
         parent::setAPIUri('/rest/structure/latest');
     }
 
-    public function create($ver)
+    public function get($ver)
     {
-        throw new JiraException('create Structure not yet implemented');
-    }
-
-    public function update($ver)
-    {
-        throw new JiraException('update Structure not yet implemented');
+        throw new JiraException('get Structure not yet implemented');
     }
 
     

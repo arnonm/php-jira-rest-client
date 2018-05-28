@@ -19,11 +19,10 @@ class ItemRequest implements \JsonSerializable
      */
     public $forest;
 
-    public $forest_spec;
-
-    public $forest_version;
-
-    public $items_version;
+    /**
+     * @var ItemsVersion
+     */
+    public $items;
 
     public $rowId;
 
@@ -33,6 +32,9 @@ class ItemRequest implements \JsonSerializable
 
     public $before;
 
+    /**
+     * @var array
+     */
     public $parameters;
 
     public function jsonSerialize()
@@ -47,7 +49,8 @@ class ItemRequest implements \JsonSerializable
      */
     public function __construct($array = [])
     {
-        $this->forest = new Item();
+        $this->item = new Item();
+        $this->forest = new Forest();
         foreach ($array as $key=>$value) {
             $this->{$key} = $value;
         }

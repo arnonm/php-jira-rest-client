@@ -1,23 +1,31 @@
 <?php
 
 namespace JiraRestApi\Structure;
-use JiraRestApi\Configuration\ConfigurationInterface;
-use Monolog\Logger;
-
+use JiraRestApi\Dumper;
 /**
- * Class to perform all user related queries.
+ * Class to perform all Forest related queries.
  *
- * @author Anik
- */
-class StructureService extends \JiraRestApi\JiraClient
+  */
+class ForestService extends \JiraRestApi\JiraClient
 {
-    private $uri = '/structure';
+    private $uri = '/forest/latest';
 
 
     public function __construct(ConfigurationInterface $configuration = null, Logger $logger = null, $path = './')
     {
         parent::__construct($configuration, $logger, $path);
-        parent::setAPIUri('/rest/structure/latest');
+        parent::setAPIUri('/rest/structure/2.0');
+    }
+
+
+    public function getForestComponents($forestcomponents)
+    {
+        $components= explode(",", $forestcomponents[0]);
+        $results = array_map(function ($elem) {
+                return explode (":", $elem);
+            }, $components);
+
+        return $results;
     }
 
     /**
@@ -47,27 +55,25 @@ class StructureService extends \JiraRestApi\JiraClient
      *
      * @param $id Structure id
      *
-     * @return Structure
+     * @return Forest|object
      *
-     *
+     *  https://jira-t3.devtools.intel.com/rest/structure/2.0/forest/latest?s={%22structureId:1318%22}
+     *  https://jira-t3.devtools.intel.com/rest/structure/2.0/forest/latest?s={%22structureId%22:1318}
      */
-    public function get($id, $withPermissions = False, $withOwner = False)
+    public function get($id)
     {
         $paramArray = array(
-            'withPermission' => $withPermissions,
-            'withOwner' => $withOwner);
+            's' => '{%22structureId%22:'.$id.'}');
 
-        $ret = $this->exec($this->uri.'/'.$id.$this->toHttpQueryParameter($paramArray));
+        $ret = $this->exec($this->uri.$this->toHttpQueryParameter($paramArray));
         $this->log->addInfo('Result='.$ret);
 
-        $xml = simplexml_load_string($ret);
-        $json = json_encode($xml);
-
         $results = $this->json_mapper->map(
-            json_decode($json), new StructureType()
+            json_decode($ret), new Forest()
         );
         return $results;
     }
+
 
     public function create($ver)
     {

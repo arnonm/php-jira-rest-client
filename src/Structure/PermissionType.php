@@ -15,32 +15,41 @@ class PermissionType
        /**
      * @var string
      */
-    public $id;
+    public $rule;
 
     /**
      * @var string
      */
-    public $name;
-
-    /**
-     * @var array "#/definitions/simple-list-wrapper"
-     */
-    public $description;
-
-    /**
-     * @var boolean
-     */
-    public $automationAccessAllowed;
-
-    /**
-     * @var boolean
-     */
-    public $adminable;
+    public $subject;
 
     /**
      * @var string
      */
-    public $owner;
+    public $level;
 
+    /**
+     * @var string
+     */
+    public $groupId;
+
+    /**
+     * @var string
+     */
+    public $projectId;
+
+    /**
+     * @var string
+     */
+    public $roleId;
+
+    /**
+     * @var string
+     */
+    public $username;
+
+    /**
+     * @var string
+     */
+    public $structureId;
 
 }

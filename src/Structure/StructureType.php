@@ -13,14 +13,7 @@ class StructureType
 {
     use ClassSerialize;
 
-    /**
-     * uri which was hit.
-     *
-     * @var string
-     */
-    public $self;
-
-    /**
+       /**
      * @var string
      */
     public $id;
@@ -31,9 +24,14 @@ class StructureType
     public $name;
 
     /**
-     * @var string
+     * @var array "#/definitions/simple-list-wrapper"
      */
     public $description;
+
+    /**
+     * @var boolean
+     */
+    public $automationAccessAllowed;
 
     /**
      * @var boolean
@@ -46,13 +44,19 @@ class StructureType
     public $editRequiresParentIssuePermission;
 
     /**
-     * @var array "#/definitions/simple-list-wrapper"
+     * @var boolean
      */
-    public $permissions;
+    public $adminable;
 
     /**
      * @var string
      */
     public $owner;
-    
+
+    /**
+     * @var array "#/definitions/simple-list-wrapper"
+     */
+    public $permissions;
+
+
 }

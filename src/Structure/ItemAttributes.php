@@ -4,33 +4,32 @@ namespace JiraRestApi\Structure;
 
 use JiraRestApi\ClassSerialize;
 
-
-class Item implements \JsonSerializable
+class ItemAttributesParams implements \JsonSerializable
 {
     use ClassSerialize;
 
-    /**
-     * @var Forest
-     */
-    public  $item;
+    public $basedOn;
 
-    public $forest;
+    public $resolveComplete;
 
-    public $forest_spec;
+    public $weightBy;
 
-    public $forest_version;
+    public function jsonSerialize()
+    {
+        return array_filter(get_object_vars($this));
+    }
+}
 
-    public $items_version;
+class ItemAttributes implements \JsonSerializable
+{
+    use ClassSerialize;
 
-    public $rowId;
+    public  $id;
 
-    public $under;
+    public $format;
 
-    public $after;
+    public $params;
 
-    public $before;
-
-    public $parameters;
 
     public function jsonSerialize()
     {
@@ -42,11 +41,8 @@ class Item implements \JsonSerializable
      *
      * @param array $array user info array.
      */
-    public function __construct($array = [])
+    public function __construct()
     {
-        $this->forest = new Forest();
-        foreach ($array as $key=>$value) {
-            $this->{$key} = $value;
-        }
+        $this->params = new ItemAttributesParams();
     }
 }
