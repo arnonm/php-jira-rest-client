@@ -11,7 +11,7 @@ use Monolog\Logger;
  */
 class ItemService extends \JiraRestApi\JiraClient
 {
-    private $uri = '/structure';
+    private $uri = '/item';
 
     #POST $baseUrl/rest/structure/2.0/item/create
     #https://wiki.almworks.com/display/structure/Item+Resource
@@ -19,11 +19,12 @@ class ItemService extends \JiraRestApi\JiraClient
     public function __construct(ConfigurationInterface $configuration = null, Logger $logger = null, $path = './')
     {
         parent::__construct($configuration, $logger, $path);
-        parent::setAPIUri('/rest/structure/latest');
+        parent::setAPIUri('/rest/structure/2.0');
     }
 
-    public function create($ver)
+    public function create($itemField)
     {
+
         throw new JiraException('create Structure not yet implemented');
     }
 

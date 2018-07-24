@@ -1,6 +1,7 @@
 <?php
 
 use JiraRestApi\Project\ProjectService;
+use JiraRestApi\Dumper;
 
 class ProjectTest extends PHPUnit_Framework_TestCase
 {
@@ -8,7 +9,7 @@ class ProjectTest extends PHPUnit_Framework_TestCase
     {
         $proj = new ProjectService();
 
-        $p = $proj->get('TEST');
+        $p = $proj->get('ICE');
 
         $this->assertTrue($p instanceof JiraRestApi\Project\Project);
         $this->assertTrue(strlen($p->key) > 0);
@@ -100,8 +101,18 @@ class ProjectTest extends PHPUnit_Framework_TestCase
     {
         $proj = new ProjectService();
 
-        $prjs = $proj->getVersions('TEST');
+        $prjs = $proj->getVersions('ICE');
 
         var_dump($prjs);
+    }
+
+    public function testGetProjectComponents()
+    {
+        $proj = new ProjectService();
+        $components = $proj->getComponents('ICE');
+        $this->assertTrue($components[0] instanceof JiraRestApi\Project\Component);
+        $this->assertTrue(strlen($components[0]->self)>0);
+        $this->assertTrue(($components[0]->id) != 0);
+
     }
 }

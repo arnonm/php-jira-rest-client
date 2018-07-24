@@ -5,7 +5,7 @@ namespace JiraRestApi\Structure;
 use JiraRestApi\ClassSerialize;
 use JiraRestApi\Dumper;
 
-class ForestComponent
+    class ForestComponent
 {
     use ClassSerialize;
 

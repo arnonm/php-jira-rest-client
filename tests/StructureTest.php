@@ -2,6 +2,7 @@
 
 use JiraRestApi\Structure\StructureService;
 use JiraRestApi\Structure\ForestService;
+use JiraRestApi\Structure\ForestComponent;
 use JiraRestApi\Dumper;
 
 class StructureTest extends PHPUnit_Framework_TestCase
@@ -55,6 +56,13 @@ class StructureTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($f instanceof JiraRestApi\Structure\Forest);
         $this->assertTrue($f->spec->structureId>0);
         $this->assertTrue($f->version->version == 1);
-        $this->assertTrue(is_array(($this->getForestComponents($f->formula))));
+        $this->assertTrue(is_array(($forest->getForestComponents($f->formula))));
+
+        foreach ($forest->getForestComponents($f->formula) as $component) {
+            print_r($component) . "\n";
+            //            echo "rowID" . $component->rowID . "\n";
+            //            echo "rowDepth " . $component->rowDepth . "\n";
+            //            echo "itemIdentity " . $component->itemIdentity . "\n";
+        }
     }
 }

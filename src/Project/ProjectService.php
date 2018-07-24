@@ -213,4 +213,17 @@ class ProjectService extends \JiraRestApi\JiraClient
 
         return $prjs;
     }
+
+    public function getComponents($projectIdOrKey)
+    {
+        $ret = $this->exec($this->uri."/$projectIdOrKey/components");
+
+        $this->log->addInfo('Result='.$ret);
+        
+        $comp = $this->json_mapper->mapArray(
+            json_decode($ret, false), new \ArrayObject(), '\JiraRestApi\Project\Component'
+        );
+
+        return $comp;
+    }
 }

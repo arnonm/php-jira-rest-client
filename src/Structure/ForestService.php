@@ -18,7 +18,7 @@ class ForestService extends \JiraRestApi\JiraClient
     }
 
 
-    public function getForestComponents($forestcomponents)
+    public function getForestComponents($forestcomponents): array
     {
         $components= explode(",", $forestcomponents[0]);
         $results = array_map(function ($elem) {
